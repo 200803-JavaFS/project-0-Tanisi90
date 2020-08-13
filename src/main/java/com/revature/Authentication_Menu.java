@@ -1,39 +1,36 @@
 package com.revature;
-
+import com.revature.models.Account;
 import java.util.Scanner;
+
 
 public class Authentication_Menu  {
 	
-	private String userName;
-	private String password;
-	public String inputPrompt;
-
 	
-
 	// Constructs a Authentication Menu for my Banking Application
-//	public Authentication_Menu() {
-//		super();
-//	System.out.println("Thank you for chooseing Bank of TP");
-//	Scanner s = new Scanner(System.in);
-//	System.out.println("What would you like to do: "
-//			+ "\n" + "[1] Customer: " + "\n" + "[2] Employee: " + "\n" + "[3] Administrator: ");
-//	int userInput = s.nextInt();
-//	}
-
+	public Authentication_Menu() {
+		super();
+	}
 	
-	// Getters and setters for User-names and Passwords
-	public String getUserName() {
-		return userName;
+	public void Menus() {
+		System.out.println("Thank you for chooseing Bank of TP");
+		Scanner input = new Scanner(System.in);
+		System.out.println("Would you like to: "
+				+ "\n" + "[1] Login " + "\n" + "[2] Create New Account");
+		int userInput = input.nextInt();
+		switch(userInput) {
+			case 1:  System.out.println("Function goes here");
+			break;
+			case 2:	Account accounts = new Account();
+				accounts.accountCreation(input);
+			break;
+			default: System.out.println("Please enter a valid option. (Numbers 1-2)");
+			break;
+		}
+		
+
+		
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	
 	
 	
 	
