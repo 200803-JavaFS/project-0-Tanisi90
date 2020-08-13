@@ -17,6 +17,7 @@ public class Account {
 	private String city;
 	private String zip;
 	private String state;
+	private String applicationType;
 
 	
 	// Method to prompt user for input for new account creation calling the setter and passing in my Scanner.
@@ -43,6 +44,22 @@ public class Account {
 		this.setState(input.next());
 		System.out.println("Zip: ");
 		this.setZip(input.next());
+		System.out.println("Please select your application type"  + "\n" + " [1] Customer Account" + "\n" +
+		" [2] Employee Account " + "\n" + " [3] Admin Account ");
+		switch(input.nextInt()){
+			case 1: this.setAccountType("Customer");
+			break;
+			case 2: this.setAccountType("Employee");
+			break;
+			case 3: this.setAccountType("Admin");
+			break;
+			default: this.setAccountType("Customer");
+			break;
+			
+		}
+		
+		
+		
 		
 	}
 	// Getters and setters
@@ -148,6 +165,12 @@ public class Account {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+	public String getApplicationType() {
+		return applicationType;
+	}
+	public void setApplicationType(String applicationType) {
+		this.applicationType = applicationType;
 	}
 	
 	
