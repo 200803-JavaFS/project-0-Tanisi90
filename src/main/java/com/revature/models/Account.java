@@ -1,181 +1,166 @@
 package com.revature.models;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Account {
+public class Account implements Serializable {
 	
-	private double currentBalance;
-	private double endingBalance;
-	private String accountType;
-	private String userName;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private int ssn;
-	private String email;
-	private String address;
-	private String city;
-	private String zip;
-	private String state;
-	private String applicationType;
+	private static final long serialVersionUID = 1;
+	
+	private int account_id;
+	private String account_type;
+	private float account_balance;
+	private boolean status;
 
+
+	public Account(String account_type, float account_balance, boolean status) {
+		super();
+		this.account_type = account_type;
+		this.account_balance = account_balance;
+		this.status = status;
+	}
 	
+	public Account(int account_id, String account_type, float account_balance, boolean status) {
+		super();
+		this.account_id = account_id;
+		this.account_type = account_type;
+		this.account_balance = account_balance;
+		this.status = status;
+	}
+
+
 	// Method to prompt user for input for new account creation calling the setter and passing in my Scanner.
 
-	public void accountCreation(Scanner input) {
-		System.out.println("Please Enter The Information Listed Below: ");
-		System.out.println("First Name: ");
-		this.setFirstName(input.next());
-		System.out.println("Last Name: ");
-		this.setLastName(input.next());
-		System.out.println("Username: ");
-		this.setUserName(input.next());
-		System.out.println("Password: ");
-		this.setPassword(input.next());
-		System.out.println("SSN: ");
-		this.setSsn(input.nextInt());
-		System.out.println("E-mail Address: ");
-		this.setEmail(input.next());
-		System.out.println("Address: ");
-		this.setAddress(input.next());
-		System.out.println("City: ");
-		this.setCity(input.next());
-		System.out.println("State: ");
-		this.setState(input.next());
-		System.out.println("Zip: ");
-		this.setZip(input.next());
-		System.out.println("Please select your application type"  + "\n" + " [1] Customer Account" + "\n" +
-		" [2] Employee Account " + "\n" + " [3] Admin Account ");
-		switch(input.nextInt()){
-			case 1: this.setAccountType("Customer");
-			break;
-			case 2: this.setAccountType("Employee");
-			break;
-			case 3: this.setAccountType("Admin");
-			break;
-			default: this.setAccountType("Customer");
-			break;
-			
-		}
-		
-		
-		
-		
-	}
+//	public void accountCreation(Scanner input) {
+//		System.out.println("Please Enter The Information Listed Below: ");
+//		System.out.println("First Name: ");
+//		this.setFirstName(input.next());
+//		System.out.println("Last Name: ");
+//		this.setLastName(input.next());
+//		System.out.println("Username: ");
+//		this.setUserName(input.next());
+//		System.out.println("Password: ");
+//		this.setPassword(input.next());
+//		System.out.println("SSN: ");
+//		this.setSsn(input.nextInt());
+//		System.out.println("E-mail Address: ");
+//		this.setEmail(input.next());
+//		System.out.println("Address: ");
+//		this.setAddress(input.next());
+//		System.out.println("City: ");
+//		this.setCity(input.next());
+//		System.out.println("State: ");
+//		this.setState(input.next());
+//		System.out.println("Zip: ");
+//		this.setZip(input.next());
+//		System.out.println("Please select your application type"  + "\n" + " [1] Customer Account" + "\n" +
+//		" [2] Employee Account " + "\n" + " [3] Admin Account ");
+//		switch(input.nextInt()){
+//			case 1: this.setAccount_type("Customer");
+//			break;
+//			case 2: this.setAccount_type("Employee");
+//			break;
+//			case 3: this.setAccount_type("Admin");
+//			break;
+//			default: this.setAccount_type("Please enter a valid response");
+//			
+//			break;
+//			
+//		}
+//		
+//	}
+
+
+
 	// Getters and setters
-		public String getUserName() {
-			return userName;
-		}
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
-		public void setUserName(String userName) {
-			this.userName = userName;
-		}
+	public int getAccount_id() {
+		return account_id;
+	}
 
-		public String getFirstName() {
-			return firstName;
-		}
 
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-			
-		}
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
+	}
 
-		public String getLastName() {
-			return lastName;
-		}
 
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
+	public String getAccount_type() {
+		return account_type;
+	}
 
-		public double getSsn() {
-			return ssn;
-		}
 
-		public void setSsn(int ssn) {
-			this.ssn = ssn;
-		}
+	public void setAccount_type(String account_type) {
+		this.account_type = account_type;
+	}
 
-		public String getEmail() {
-			return email;
-		}
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	public float getAccount_balance() {
+		return account_balance;
+	}
 
-		public String getAddress() {
-			return address;
-		}
 
-		public void setAddress(String address) {
-			this.address = address;
-		}
-
-		public String getCity() {
-			return city;
-		}
-
-		public void setCity(String city) {
-			this.city = city;
-		}
-
-		public String getZip() {
-			return zip;
-		}
-
-		public void setZip(String zip) {
-			this.zip = zip;
-		}
-
-		public String getState() {
-			return state;
-		}
-
-		public void setState(String state) {
-			this.state = state;
-		}
-		
-	
-	public double getCurrentBalance() {
-		return currentBalance;
+	public void setAccount_balance(float account_balance) {
+		this.account_balance = account_balance;
 	}
 	
-	public double getEndingBalance() {
-		return endingBalance;
+
+	public boolean isStatus() {
+		return status;
 	}
 
-	public String getAccountType() {
-		return accountType;
-	}
-	
-	public void setCurrentBalance(double currentBalance) {
-		this.currentBalance = currentBalance;
-	}
-	
-	public void setEndingBalance(double endingBalance) {
-		this.endingBalance = endingBalance;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(account_balance);
+		result = prime * result + account_id;
+		result = prime * result + ((account_type == null) ? 0 : account_type.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
+		return result;
+	}
 
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (Float.floatToIntBits(account_balance) != Float.floatToIntBits(other.account_balance))
+			return false;
+		if (account_id != other.account_id)
+			return false;
+		if (account_type == null) {
+			if (other.account_type != null)
+				return false;
+		} else if (!account_type.equals(other.account_type))
+			return false;
+		if (status != other.status)
+			return false;
+		return true;
 	}
-	public String getApplicationType() {
-		return applicationType;
-	}
-	public void setApplicationType(String applicationType) {
-		this.applicationType = applicationType;
+
+	@Override
+	public String toString() {
+		return "Account [account_id=" + account_id + ", account_type=" + account_type + ", account_balance="
+				+ account_balance + ", status=" + status + "]";
 	}
 	
+
 	
 
 
+
+
+
+
+
+	
 	
 	
 
