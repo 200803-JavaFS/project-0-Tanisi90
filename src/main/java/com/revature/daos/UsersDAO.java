@@ -50,11 +50,11 @@ public class UsersDAO implements UsersIDAO {
 			ResultSet result = statement.executeQuery(sql);
 
 			if (result.next()) {
-				Users a = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
+				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
 						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
 								result.getString("city"), result.getString("state"), result.getString("zip"),
 										result.getString("email"), result.getString("social_namuber"));
-				return a;
+				return u;
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();

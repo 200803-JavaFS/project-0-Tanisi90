@@ -20,9 +20,9 @@ public class Authentication_Menu  {
 		switch(userInput) {
 			case 1:  System.out.println("Function goes here");
 			break;
-			case 2:	Account accounts = new Account();
+			//case 2:	Account accounts = new Account();
 			//	accounts.createAccount(input);
-			break;
+			//break;
 			default: System.out.println("Please enter a valid option. (Numbers 1-2)");
 			break;
 		}
