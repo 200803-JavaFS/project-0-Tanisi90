@@ -11,7 +11,8 @@ public List<Users> findAll();
 	
 	public boolean addUser(Users a);
 	
-	public boolean updateUser(Users a); 
-	
+	public boolean updateUser(Users a);
+
+	public Users findUser(String username, String password); 
 
 }

@@ -132,7 +132,33 @@ public class UsersDAO implements UsersIDAO {
 		return false;
 	}
 
-
+	public Users findUser(String username, String password) {
+		try (Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM Users WHERE username = " + username + "AND password = " + password + ";";
+			
+			Statement statement = conn.createStatement();
+			
+			ResultSet result = statement.executeQuery(sql);
+			
+			if (result.next()) {
+				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
+						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
+								result.getString("city"), result.getString("state"), result.getString("zip"),
+										result.getString("email"), result.getString("social_namuber"));
+				return u;
+			}
+		}catch (SQLException e) {
+		e.printStackTrace();
+		}
+		System.out.println("Unable to find username or password doesn't match. Please try again!");
+		return null;
+	}
 }
+
+	
+	
+	
+
+
 
 
