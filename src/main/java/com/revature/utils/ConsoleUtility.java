@@ -15,8 +15,9 @@ import com.revature.services.Login;
 public class ConsoleUtility {
 	
 	private static UserAccountsDAO uacc = new UserAccountsDAO();
-	
+	private static AccountDAO acc = new AccountDAO();
 	private static final Scanner scan = new Scanner(System.in);
+	private static AccountServices  as = new AccountServices();
 	
 	public static void Menus() {
 		System.out.println("Thank you for chooseing Bank of TP");
@@ -54,8 +55,47 @@ public class ConsoleUtility {
 		
 		if(account.getAccount_type() == "Checking" || account.getAccount_type() == "Savings") {
 			System.out.println("Please select an option: "
-					+ "\n" + "[1] Deposit " + "\n" + "[2] Withdrawl " + "\n" + "[3] Transfer to other Account");
+					+ "\n" + "[1] Deposit " + "\n" + "[2] Withdrawl " + "\n" + "[3] Transfer to other Account" 
+					+ "\n" + "[4] Logout");
 			input = scan.nextInt();
+			switch(input) {
+			case 1:  System.out.println("How much would you like to Deposit: $");
+				float dinput= scan.nextFloat();
+				as.Deposit(account, dinput);
+				break;
+			case 2:	System.out.println("How much would you like to Withdrawl: $");
+				float winput= scan.nextFloat();
+				as.Deposit(account, winput);
+				break;
+			case 3: System.out.println("Which account are you transfering from: ");
+					for(int i = 0; i < accounts.size(); i++) {
+						//will give me the option to select a number for which account to login to. 
+						
+						// This is from account a
+						System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
+					}
+					input = scan.nextInt();
+					Account Acc = accounts.get(input - 1);
+					
+					// This is from account b
+					System.out.println("Which account are you transfering to: ");
+					for(int i = 0; i < accounts.size(); i++) {
+						System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
+					}
+					input = scan.nextInt();
+					Account Accb = accounts.get(input - 1);
+					
+					System.out.println("How much would you like to transfer: $");
+					float finput= scan.nextFloat();
+					as.Transfer(Acc, Accb, finput);
+				break;
+			case 4: Menus(); 
+				return;
+			default: 
+				break;
+		}
+			
+			
 		}
 		
 		else if(account.getAccount_type() == "Admin") {
@@ -72,6 +112,7 @@ public class ConsoleUtility {
 		
 		
 	}
+
 
 
 }
