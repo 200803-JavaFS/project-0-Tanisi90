@@ -16,17 +16,20 @@ public class Login {
 	public static Scanner s = new Scanner(System.in);
 	
 	public static Users login() {
-		System.out.println("Welcome to the bank of TP: ");
 		System.out.println("Please Enter Your Username and Password:");
 		String username = s.nextLine();
 		String password = s.nextLine();
 	
 		Users u = userDao.findUser(username, password);
-		
-		System.out.println("Welcome " + u.getUsername());
-		log.info(u.getUsername() + " Logged In:");
-		
-		return u;
+		if(u != null) {
+			System.out.println("Welcome " + u.getUsername());
+			log.info(u.getUsername() + " Logged In:");
+			
+			return u;
+		}else {
+			log.info("Login Failed. Please try again!");
+			return u;
+		}
 		
 	}
 	

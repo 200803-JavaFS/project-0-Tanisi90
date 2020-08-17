@@ -13,6 +13,10 @@ public class Account implements Serializable {
 	private boolean status;
 
 
+	public Account() {
+		super();
+	}
+
 	public Account(String account_type, float account_balance, boolean status) {
 		super();
 		this.account_type = account_type;
@@ -27,48 +31,6 @@ public class Account implements Serializable {
 		this.account_balance = account_balance;
 		this.status = status;
 	}
-
-
-	// Method to prompt user for input for new account creation calling the setter and passing in my Scanner.
-
-//	public void accountCreation(Scanner input) {
-//		System.out.println("Please Enter The Information Listed Below: ");
-//		System.out.println("First Name: ");
-//		this.setFirstName(input.next());
-//		System.out.println("Last Name: ");
-//		this.setLastName(input.next());
-//		System.out.println("Username: ");
-//		this.setUserName(input.next());
-//		System.out.println("Password: ");
-//		this.setPassword(input.next());
-//		System.out.println("SSN: ");
-//		this.setSsn(input.nextInt());
-//		System.out.println("E-mail Address: ");
-//		this.setEmail(input.next());
-//		System.out.println("Address: ");
-//		this.setAddress(input.next());
-//		System.out.println("City: ");
-//		this.setCity(input.next());
-//		System.out.println("State: ");
-//		this.setState(input.next());
-//		System.out.println("Zip: ");
-//		this.setZip(input.next());
-//		System.out.println("Please select your application type"  + "\n" + " [1] Customer Account" + "\n" +
-//		" [2] Employee Account " + "\n" + " [3] Admin Account ");
-//		switch(input.nextInt()){
-//			case 1: this.setAccount_type("Customer");
-//			break;
-//			case 2: this.setAccount_type("Employee");
-//			break;
-//			case 3: this.setAccount_type("Admin");
-//			break;
-//			default: this.setAccount_type("Please enter a valid response");
-//			
-//			break;
-//			
-//		}
-//		
-//	}
 
 
 

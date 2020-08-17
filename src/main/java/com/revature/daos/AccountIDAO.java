@@ -9,10 +9,13 @@ public List<Account> findAll();
 	
 	public Account findById(int id);
 	
-	public boolean addAccount(Account a);
+	public int addAccount(Account a);
 	
 	public boolean updateAccount(Account a); 
 	
 	public boolean closeAccount(int account_id);
+
+	public boolean openAccount(int account_id);
+
 
 }

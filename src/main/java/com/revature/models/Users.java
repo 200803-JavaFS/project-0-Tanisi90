@@ -17,6 +17,7 @@ public class Users implements Serializable{
 	private String zip;
 	private String email;
 	private String social_number;
+	private String account_type;
 	
 	public Users() {
 		super();
@@ -155,11 +156,20 @@ public class Users implements Serializable{
 	public void setSocial_number(String social_number) {
 		this.social_number = social_number;
 	}
+	
+	public String getAccount_type() {
+		return account_type;
+	}
+
+	public void setAccount_type(String account_type) {
+		this.account_type = account_type;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((account_type == null) ? 0 : account_type.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -183,6 +193,11 @@ public class Users implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Users other = (Users) obj;
+		if (account_type == null) {
+			if (other.account_type != null)
+				return false;
+		} else if (!account_type.equals(other.account_type))
+			return false;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -240,12 +255,15 @@ public class Users implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", first_name=" + first_name + ", last_name="
-				+ last_name + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip
-				+ ", email=" + email + ", user_id=" + user_id + ", social_number=" + social_number + "]";
+		return "Users [user_id=" + user_id + ", username=" + username + ", password=" + password + ", first_name="
+				+ first_name + ", last_name=" + last_name + ", address=" + address + ", city=" + city + ", state="
+				+ state + ", zip=" + zip + ", email=" + email + ", social_number=" + social_number + ", account_type="
+				+ account_type + "]";
 	}
 
 
+
+	
 
 
 }

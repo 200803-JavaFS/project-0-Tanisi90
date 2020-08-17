@@ -18,7 +18,7 @@ public class UserAccountsDAO implements UserAccountsIDAO {
 		try (Connection conn = ConnectionUtility.getConnection()) {
 			String sql = "SELECT  account.* FROM user_accounts "
 					+ "JOIN account ON account.account_id = user_accounts.account_id_fk "
-					+ "WHERE user_id_fk =" + user_id + ";";
+					+ "WHERE user_id_fk =" + user_id + "AND account.status = TRUE;";
 
 			Statement statement = conn.createStatement();
 
@@ -101,5 +101,7 @@ public class UserAccountsDAO implements UserAccountsIDAO {
 		}
 		return;
 	}
+	
+	
 
 }

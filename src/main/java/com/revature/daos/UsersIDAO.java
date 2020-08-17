@@ -9,10 +9,12 @@ public List<Users> findAll();
 	
 	public Users findById(int id);
 	
-	public boolean addUser(Users a);
+	public int addUser(Users a);
 	
 	public boolean updateUser(Users a);
 
 	public Users findUser(String username, String password); 
+	
+	public Users findUserByName(String username);
 
 }
