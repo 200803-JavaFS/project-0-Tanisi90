@@ -169,7 +169,10 @@ public class ConsoleUtility {
 			System.out.println("Please enter account number of account being closed?");
 			acc.closeAccount(input);
 			if (account.getAccount_id() == input) {
-				System.out.println("This account is now closed. We are sorry to see you go :(. We hope you don't run out of TP! ");
+				System.out.println("This account is now closed. We are sorry to see you go :(. "
+						+ "We hope you don't run out of TP! ");
+				account.setAccount_balance(0);
+				acc.updateAccount(account);
 			}
 			break;
 		}
