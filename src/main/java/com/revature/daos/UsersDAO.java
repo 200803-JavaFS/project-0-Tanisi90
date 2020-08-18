@@ -111,13 +111,7 @@ public class UsersDAO implements UsersIDAO {
 			statement.setString(++index, a.getState());
 			statement.setString(++index, a.getZip());
 			statement.setString(++index, a.getEmail());
-//			if(a.getHomeBase()!=null) {
-//				Home h = a.getHomeBase();
-//				statement.setString(++index, h.getHomeBase());
-//			}else {
-//				statement.setString(++index, null);
-//			}
-//			statement.setInt(++index, a.getSupId());
+
 			
 			statement.execute();
 			return true;

@@ -9,6 +9,7 @@ public class ApplicationMain {
 //		am.Menus();
 		
 		ConsoleUtility cons = new ConsoleUtility();
+		cons.Menus();
 		}
 
 	}
