@@ -3,13 +3,17 @@ package com.revature.utils;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.daos.AccountDAO;
 import com.revature.daos.UserAccountsDAO;
 import com.revature.daos.UsersDAO;
+import com.revature.daos.UsersIDAO;
 import com.revature.models.Account;
 import com.revature.models.Users;
 import com.revature.services.AccountServices;
-import com.revature.services.Login;
+
 
 
 
@@ -20,6 +24,11 @@ public class ConsoleUtility {
 	private static AccountServices  as = new AccountServices();
 	private static UsersDAO us = new UsersDAO();
 	private static final Scanner scan = new Scanner(System.in);
+	private static final Logger log = LogManager.getLogger(ConsoleUtility.class);
+	private static UsersIDAO userDao = new UsersDAO();
+
+	
+
 
 	
 	public static void Menus() {
@@ -28,11 +37,7 @@ public class ConsoleUtility {
 				+ "\n" + "[1] Login " + "\n" + "[2] Apply For New Account ");
 		int userInput = scan.nextInt();
 		switch(userInput) {
-			case 1: Users user = Login.login();
-				if(user!= null) {
-					LoggedInMenu(user);
-				}
-			
+			case 1: Login.login();
 			break;
 			case 2:	AccountServices.accountCreation(scan);
 			break;
@@ -41,8 +46,28 @@ public class ConsoleUtility {
 		}
 		
 	}
+	public static class Login {
+
+		public static Users login() {
+			System.out.println("Please Enter Your Username and Password:");
+			String username = scan.nextLine();
+			String password = scan.nextLine();
+		
+			Users u = userDao.findUser(username, password);
+			if(u != null) {
+				System.out.println("Welcome " + u.getUsername());
+				log.info(u.getUsername() + " Logged In:");
+				
+				return u;
+			}else {
+				log.info("Login Failed. Please try again!");
+				return u;
+			}
+			
+		}
 	
-	public static void LoggedInMenu(Users user){
+	public void LoggedInMenu(Users user){
+		System.out.println("Are you working?");
 		List<Account> accounts = uacc.findUserAccounts(user.getUser_id());
 		System.out.println("Here are you accounts: ");
 		for(int i = 0; i < accounts.size(); i++) {
@@ -70,7 +95,8 @@ public class ConsoleUtility {
 				float winput= scan.nextFloat();
 				as.Deposit(account, winput);
 				break;
-			case 3: System.out.println("Which account are you transfering from: ");
+			case 3: System.out.println("Which account are you transfering from? ");		
+			
 					for(int i = 0; i < accounts.size(); i++) {
 						//will give me the option to select a number for which account to login to. 
 						
@@ -105,7 +131,7 @@ public class ConsoleUtility {
 			//Approve/Deny accounts
 			//withdrawl, deposit, transfer from all accounts
 			//close accounts. 
-			System.out.println("What would you like to do?: " 
+			System.out.println("What would you like to do as the Admin?: " 
 					+ "\n" + "[1] Approve / Deny account? " + "\n" + "[2] Deposit TP into account? " + "\n" + "[3] Withdrawl from account? "
 					+ "\n" + "[4] Transfer TP to different account? " + "\n" + "[5] View All Accounts" + "\n" + "[6] Close a account?");
 			input = scan.nextInt();
@@ -141,23 +167,24 @@ public class ConsoleUtility {
 			break;
 			
 		case 4:
-			System.out.println("Which account are you transfering from: ");
+			System.out.println("Which account are you transfering from: "); 
 			acc.findById(input);
-			if (account.getAccount_type() == "Savings") {
+			if (account.getAccount_id() == input && account.getAccount_type() == "Savings") {
 				for (int i = 0; i < accounts.size(); i++) {
 					// will give me the option to select a number for which account to login to.
 
 					// This is from account a checking or savings
 					System.out.println("[" + (i + 1) + "]" + accounts.get(i).getAccount_type());
 				}
-				input = scan.nextInt();
+				// Need to deposit and withdrawl here if account_type == savings { deposit amount to checking
+
 				Account Acc = accounts.get(input - 1);
-			} else if (account.getAccount_type() == "Checking") {
+			} else if (account.getAccount_id() == input && account.getAccount_type() == "Checking") {
 				// This is from account b checking or savings
 				for (int i = 0; i < accounts.size(); i++) {
 					System.out.println("[" + (i + 1) + "]" + accounts.get(i).getAccount_type());
 				}
-				input = scan.nextInt();
+				// need to deposit and withdraw here. 
 				Account Accb = accounts.get(input - 1);
 			} else {
 				System.out.println("Please enter a valid account number. ");
@@ -181,12 +208,17 @@ public class ConsoleUtility {
 			//Account Information
 			//Account Balance
 			//Personal Information
+			System.out.println("Have a beautiful day today! What would you like to accomplish today? :"
+					+ "\n" + "[1] Look at unopened accounts " + "\n" + "[2] Get user account information"
+					+ "\n" + "[3] View user account balance" + " \n" + "[4] Get users full information");
+			
+			
 		}
-		
-		
-		
+
 	}
-
-
-
 }
+}
+
+
+
+

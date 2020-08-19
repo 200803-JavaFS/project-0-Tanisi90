@@ -13,7 +13,8 @@ public class AccountServices {
 	
 	private static AccountDAO acc = new AccountDAO();
 	private static UsersDAO user = new UsersDAO();
-	private static UserAccountsDAO ua = new UserAccountsDAO();
+	private static UserAccountsDAO ua = new UserAccountsDAO(); 
+	//private static ConsoleUtility cu = new ConsoleUtility();
 	// Method to prompt user for input for new account creation calling the setter and passing in my Scanner.
 
 	public static void accountCreation(Scanner input) {
@@ -34,13 +35,17 @@ public class AccountServices {
 		System.out.println("E-mail Address: ");
 		us.setEmail(input.next());
 		System.out.println("Address: ");
-		us.setAddress(input.next());
+		input.nextLine();
+		us.setAddress(input.nextLine());
 		System.out.println("City: ");
 		us.setCity(input.next());
+		input.nextLine();
 		System.out.println("State: ");
 		us.setState(input.next());
 		System.out.println("Zip: ");
 		us.setZip(input.next());
+		 
+		
 		System.out.println("Please select your application type"  + "\n" + " [1] Customer Account" + "\n" +
 		" [2] Employee Account " + "\n" + " [3] Admin Account ");
 		switch(input.nextInt()){
@@ -55,13 +60,13 @@ public class AccountServices {
 			
 		}
 		
-		a.setStatus(false);
-		a.setAccount_balance(0);
-		
 		int uid = user.addUser(us);
 		int aid = acc.addAccount(a);
 		
 		ua.addAccountToUser(uid, aid);
+
+		a.setStatus(false);
+		a.setAccount_balance(0);	
 		
 		System.out.println("Your account is in review.");
 		

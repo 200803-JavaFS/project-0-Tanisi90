@@ -71,18 +71,18 @@ public class UserAccountsDAO implements UserAccountsIDAO {
 
 	@Override
 	public void addAccountToUser(int user_id, int account_id) {
+		System.out.println(user_id + " " + account_id + " ");
 		try (Connection conn = ConnectionUtility.getConnection()){
 			String sql = "INSERT INTO user_accounts (user_id_fk , account_id_fk )"
 					+ "VALUES (" + user_id + "," + account_id + ");";
 			
 			Statement statement = conn.createStatement();
 			
-			statement.executeQuery(sql);
+			statement.execute(sql);
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return;
 	}
 		
 
@@ -94,12 +94,12 @@ public class UserAccountsDAO implements UserAccountsIDAO {
 			
 			Statement statement = conn.createStatement();
 			
-			statement.executeQuery(sql);
+			statement.execute(sql);
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return;
+
 	}
 	
 	
