@@ -14,24 +14,23 @@ import com.revature.utils.ConnectionUtility;
 public class UserAccountsDAO implements UserAccountsIDAO {
 
 	@Override
-	public List<Account> findUserAccounts(int user_id) {
+	public Account findUserAccounts(int user_id) {
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "SELECT  account.* FROM user_accounts "
-					+ "JOIN account ON account.account_id = user_accounts.account_id_fk "
-					+ "WHERE user_id_fk =" + user_id + "AND account.status = TRUE;";
+			String sql = "SELECT * FROM account "
+					+ "JOIN user_accounts  ON account_id = user_accounts.account_id_fk " + 
+					"WHERE user_id_fk = " + user_id  + "AND status = TRUE;";
 
 			Statement statement = conn.createStatement();
 
-			List<Account> list = new ArrayList<>();
-
 			ResultSet result = statement.executeQuery(sql);
 
-			while (result.next()) {
+			if(result.next()) {
 				Account a = new Account(result.getInt("account_id"), result.getString("account_type"), 
 						result.getFloat("account_balance"),result.getBoolean("status"));
-				list.add(a);
+				return a;
+			}else {
+			return null;
 			}
-			return list;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

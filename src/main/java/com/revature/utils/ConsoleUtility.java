@@ -39,7 +39,7 @@ public class ConsoleUtility {
 		int userInput = scan.nextInt();
 		scan.nextLine();
 		switch(userInput) {
-			case 1: login();
+			case 1: LoggedInMenu(login());
 			break;
 			case 2:	AccountServices.accountCreation(scan);
 			break;
@@ -69,25 +69,27 @@ public class ConsoleUtility {
 			
 		}
 	
-	public void LoggedInMenu(Users user){
-		List<Account> accounts = uacc.findUserAccounts(user.getUser_id());
-		System.out.println("Here are you accounts: ");
-		for(int i = 0; i < accounts.size(); i++) {
-			//will give me the option to select a number for which account to login to. 
-			System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
-
-		}
+	public static void LoggedInMenu(Users user){
+		//List<Account> accounts = uacc.findUserAccounts(user.getUser_id());
+		System.out.println("Here are your accounts: ");
+//		for(int i = 0; i < account.size(); i++) {
+//			//will give me the option to select a number for which account to login to. 
+//			System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
+//
+//		}
+//		
+		//System.out.println("Which account would you like to access? ");
+		//int input = scan.nextInt();
 		
-		System.out.println("Which account would you like to access? ");
-		int input = scan.nextInt();
+		Account account = uacc.findUserAccounts(user.getUser_id() );
 		
-		Account account = accounts.get(input - 1);
-		
-		if(account.getAccount_type() == "Checking" || account.getAccount_type() == "Savings") {
+		//if(account.getAccount_type() == "Checking" || account.getAccount_type() == "Savings") {
 			System.out.println("Please select an option: "
 					+ "\n" + "[1] Deposit " + "\n" + "[2] Withdrawl " + "\n" + "[3] Transfer to other Account" 
 					+ "\n" + "[4] Logout");
-			input = scan.nextInt();
+			int input = scan.nextInt();
+			
+			
 			switch(input) {
 			case 1:  System.out.println("How many rolls would you like to Deposit: ");
 				float dinput= scan.nextFloat();
@@ -97,27 +99,22 @@ public class ConsoleUtility {
 				float winput= scan.nextFloat();
 				as.Deposit(account, winput);
 				break;
-			case 3: System.out.println("Which account are you transfering from? ");		
+			case 3: System.out.println("Which account are you Transfering from? ");
+					int fid = scan.nextInt();
+					acc.findById(account.getAccount_id());
+					System.out.println("How much would you like to withdrawl? ");
+					float wamount = scan.nextFloat();
+					as.Withdrawl(account, wamount);
 			
-					for(int i = 0; i < accounts.size(); i++) {
-						//will give me the option to select a number for which account to login to. 
-						
-						// This is from account a checking or savings
-						System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
-					}
-					input = scan.nextInt();
-					Account Acc = accounts.get(input - 1);
 					
-					// This is from account b checking or savings
 					System.out.println("Which account are you transfering to: ");
-					for(int i = 0; i < accounts.size(); i++) {
-						System.out.println("[" + (i+1) + "]"  + accounts.get(i).getAccount_type()); 
-					}
-					input = scan.nextInt();
-					Account Accb = accounts.get(input - 1);
-					
-					System.out.println("How many rolls would you like to transfer: ");
-					float finput= scan.nextFloat();
+
+					fid = scan.nextInt();
+					acc.findById(account.getAccount_id());
+					System.out.println("How many would you like to deposit? ");
+					float damount = scan.nextFloat();
+					as.Deposit(account, damount); 
+		
 					as.Transfer(Acc, Accb, finput);
 				break;
 			case 4: Menus(); 
@@ -127,9 +124,9 @@ public class ConsoleUtility {
 		}
 			
 			
-		}
+	//	}
 		
-		else if(account.getAccount_type() == "Admin") {
+		 if(account.getAccount_type() == "Admin") {
 			//Approve/Deny accounts
 			//withdrawl, deposit, transfer from all accounts
 			//close accounts. 
@@ -153,44 +150,26 @@ public class ConsoleUtility {
 			
 		case 2:
 			System.out.println("Which account would you like to Deposit TP into? ");
-			acc.findById(input);
-			if (account.getAccount_id() == input) {
-				as.Deposit(account, input); // I may have used the wrong variable for account may need to change to a.
-											// If this function doesn't work that may be why.
-			}
+			input = scan.nextInt();
+			account = acc.findById(input);
+			System.out.println("How much would you like to deposit? ");
+			float amount = scan.nextFloat();
+			as.Deposit(account, amount); 
 			break;
 
 		case 3:
 			System.out.println("Which account would you like to Withdrawl TP from? ");
-			acc.findById(input);
-			if (account.getAccount_id() == input) {
-				as.Withdrawl(account, input);
-			}
+			input = scan.nextInt();
+			account = acc.findById(input);
+			System.out.println("How much would you like to withdrawl? ");
+			float wamount = scan.nextFloat();
+			as.Withdrawl(account, wamount);
 			break;
 			
 		case 4:
 			System.out.println("Which account are you transfering from: "); 
 			acc.findById(input);
-			if (account.getAccount_id() == input && account.getAccount_type() == "Savings") {
-				for (int i = 0; i < accounts.size(); i++) {
-					// will give me the option to select a number for which account to login to.
-
-					// This is from account a checking or savings
-					System.out.println("[" + (i + 1) + "]" + accounts.get(i).getAccount_type());
-				}
-				// Need to deposit and withdrawl here if account_type == savings { deposit amount to checking
-
-				Account Acc = accounts.get(input - 1);
-			} else if (account.getAccount_id() == input && account.getAccount_type() == "Checking") {
-				// This is from account b checking or savings
-				for (int i = 0; i < accounts.size(); i++) {
-					System.out.println("[" + (i + 1) + "]" + accounts.get(i).getAccount_type());
-				}
-				// need to deposit and withdraw here. 
-				Account Accb = accounts.get(input - 1);
-			} else {
-				System.out.println("Please enter a valid account number. ");
-			}
+			
 			break;
 		case 5: // View all accounts
 			break;
@@ -213,7 +192,16 @@ public class ConsoleUtility {
 			System.out.println("Have a beautiful day today! What would you like to accomplish today? :"
 					+ "\n" + "[1] Look at unopened accounts " + "\n" + "[2] Get user account information"
 					+ "\n" + "[3] View user account balance" + " \n" + "[4] Get users full information");
+			input = scan.nextInt();
+			switch(input) {
+			case 1: acc.findAllClosedAccounts();
+			break;
+			case 2: acc.findById(input);
+			input = scan.nextInt();
+			uacc.findAccountUsers(input);
+			input = scan.nextInt();
 			
+			case 3: 
 			
 		}
 

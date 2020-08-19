@@ -74,19 +74,22 @@ public class AccountServices {
 	}
 	
 	public float Deposit(Account a, float input) {
-		
-		System.out.println("Deposit Amount: $" + input);
-		a.setAccount_balance(a.getAccount_balance() + input);
-		System.out.println(a.getAccount_balance());
+		if(input < 0 ) {
+			System.out.println("You have entered a negative input please select a positive number!");
+		}else {
+			System.out.println("Deposit Amount: " + input);
+			a.setAccount_balance(a.getAccount_balance() + input);
+			System.out.println(a.getAccount_balance());
 		
 		acc.updateAccount(a);
+		}
 		return a.getAccount_balance();
 		
 	}
 	public float Withdrawl(Account a, float input) {
-		System.out.println("Withdrawl Amount: $" + input);
+		System.out.println("Withdrawl Amount: " + input);
 		if(a.getAccount_balance() - input < 0) {
-			System.out.println("You do not have sufficient funds to withdrawl.");
+			System.out.println("You do not have sufficient toilet paper to withdrawl.");
 			return 0;
 		}else if(input < 0){
 			System.out.println("You have entered a negative input please select a positive number!");
@@ -100,9 +103,10 @@ public class AccountServices {
 	}
 
 	public void Transfer(Account a, Account b, float input) {
-		System.out.println("Transfer Amount: $" + input);
+		System.out.println("Transfer Amount: " + input);
+		float abalance = a.getAccount_balance();
 		float balance = Withdrawl(a, input);
-		if(balance == 0 && input != 0) {
+		if(balance == 0 && abalance != input) {
 			return;
 		}else {
 			Deposit(b, input);

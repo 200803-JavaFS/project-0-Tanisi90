@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.Account;
 import com.revature.models.Users;
 import com.revature.utils.ConnectionUtility;
 
@@ -210,6 +211,7 @@ public class UsersDAO implements UsersIDAO {
 		System.out.println("Unable to find username. Please try again!");
 		return null;
 	}
+	
 }
 
 	

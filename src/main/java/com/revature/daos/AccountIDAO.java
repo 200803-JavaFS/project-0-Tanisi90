@@ -17,5 +17,7 @@ public List<Account> findAll();
 
 	public boolean openAccount(int account_id);
 
+	public List<Account> findAllClosedAccounts();
+
 
 }

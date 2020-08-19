@@ -137,8 +137,29 @@ public class AccountDAO implements AccountIDAO {
 		return false;
 	}
 	
+	@Override
+	public List<Account> findAllClosedAccounts() {
+		try (Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM Account WHERE status = FALSE;";
 
+			Statement statement = conn.createStatement();
 
+			List<Account> list = new ArrayList<>();
+
+			ResultSet result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				Account a = new Account(result.getInt("account_id"), result.getString("account_type"), 
+						result.getFloat("account_balance"),result.getBoolean("status"));
+				list.add(a);
+			}
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
 
