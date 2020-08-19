@@ -17,6 +17,7 @@ import com.revature.services.AccountServices;
 
 
 
+
 public class ConsoleUtility {
 	
 	private static UserAccountsDAO uacc = new UserAccountsDAO();
@@ -25,7 +26,7 @@ public class ConsoleUtility {
 	private static UsersDAO us = new UsersDAO();
 	private static final Scanner scan = new Scanner(System.in);
 	private static final Logger log = LogManager.getLogger(ConsoleUtility.class);
-	private static UsersIDAO userDao = new UsersDAO();
+
 
 	
 
@@ -36,8 +37,9 @@ public class ConsoleUtility {
 		System.out.println("Would you like to: "
 				+ "\n" + "[1] Login " + "\n" + "[2] Apply For New Account ");
 		int userInput = scan.nextInt();
+		scan.nextLine();
 		switch(userInput) {
-			case 1: Login.login();
+			case 1: login();
 			break;
 			case 2:	AccountServices.accountCreation(scan);
 			break;
@@ -46,18 +48,19 @@ public class ConsoleUtility {
 		}
 		
 	}
-	public static class Login {
 
 		public static Users login() {
-			System.out.println("Please Enter Your Username and Password:");
+			System.out.println("Please Enter Your Username");
 			String username = scan.nextLine();
+			us.findUsername(username);
+			System.out.println("Please Enter Your Password");
 			String password = scan.nextLine();
+			us.findPassword(password);
 		
-			Users u = userDao.findUser(username, password);
+			Users u = us.findUser(username, password);
 			if(u != null) {
 				System.out.println("Welcome " + u.getUsername());
 				log.info(u.getUsername() + " Logged In:");
-				
 				return u;
 			}else {
 				log.info("Login Failed. Please try again!");
@@ -67,7 +70,6 @@ public class ConsoleUtility {
 		}
 	
 	public void LoggedInMenu(Users user){
-		System.out.println("Are you working?");
 		List<Account> accounts = uacc.findUserAccounts(user.getUser_id());
 		System.out.println("Here are you accounts: ");
 		for(int i = 0; i < accounts.size(); i++) {
@@ -217,7 +219,7 @@ public class ConsoleUtility {
 
 	}
 }
-}
+
 
 
 

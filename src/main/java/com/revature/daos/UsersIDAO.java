@@ -13,7 +13,11 @@ public List<Users> findAll();
 	
 	public boolean updateUser(Users a);
 
-	public Users findUser(String username, String password); 
+	public Users findUsername(String username); 
+	
+	public Users findPassword(String password);
+	
+	public Users findUser(String username, String password);
 	
 	public Users findUserByName(String username);
 

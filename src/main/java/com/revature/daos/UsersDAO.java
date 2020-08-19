@@ -122,9 +122,9 @@ public class UsersDAO implements UsersIDAO {
 		return false;
 	}
 
-	public Users findUser(String username, String password) {
+	public Users findUsername(String username) {
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "SELECT * FROM Users WHERE username = " + username + "AND password = " + password + ";";
+			String sql = "SELECT * FROM Users WHERE username = '" + username + "';";
 			
 			Statement statement = conn.createStatement();
 			
@@ -134,16 +134,61 @@ public class UsersDAO implements UsersIDAO {
 				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
 						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
 								result.getString("city"), result.getString("state"), result.getString("zip"),
-										result.getString("email"), result.getString("social_namuber"));
+										result.getString("email"), result.getString("social_number"));
+				
+				return u;
+
+			}
+		}catch (SQLException e) {
+		e.printStackTrace();
+		}
+		System.out.println("Unable to find username. Please try again!");
+		return null;
+	}
+	
+	public Users findPassword(String password) {
+		try (Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM Users WHERE password = '" + password + "';";
+			
+			Statement statement = conn.createStatement();
+			
+			ResultSet result = statement.executeQuery(sql);
+			
+			if (result.next()) {
+				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
+						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
+								result.getString("city"), result.getString("state"), result.getString("zip"),
+										result.getString("email"), result.getString("social_number"));
 				return u;
 			}
 		}catch (SQLException e) {
 		e.printStackTrace();
 		}
-		System.out.println("Unable to find username or password doesn't match. Please try again!");
+		System.out.println("Password does not match. Please try again!");
 		return null;
 	}
 	
+	public Users findUser(String username, String password) {
+		try (Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT * FROM Users WHERE username = '" + username + "'AND password = '" + password + "';";
+			
+			Statement statement = conn.createStatement();
+			
+			ResultSet result = statement.executeQuery(sql);
+			
+			if (result.next()) {
+				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
+						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
+								result.getString("city"), result.getString("state"), result.getString("zip"),
+										result.getString("email"), result.getString("social_number"));
+				return u;
+			}
+		}catch (SQLException e) {
+		e.printStackTrace();
+		}
+		System.out.println("Credentials do not match. Please try again!");
+		return null;
+	}
 	public Users findUserByName(String username) {
 		try (Connection conn = ConnectionUtility.getConnection()) {
 			String sql = "SELECT * FROM Users WHERE username = " + username + ";";
@@ -156,7 +201,7 @@ public class UsersDAO implements UsersIDAO {
 				Users u = new Users(result.getInt("user_id"), result.getString("username"), result.getString("password"), 
 						result.getString("first_name"),result.getString("last_name"), result.getString("address"),
 								result.getString("city"), result.getString("state"), result.getString("zip"),
-										result.getString("email"), result.getString("social_namuber"));
+										result.getString("email"), result.getString("social_number"));
 				return u;
 			}
 		}catch (SQLException e) {
