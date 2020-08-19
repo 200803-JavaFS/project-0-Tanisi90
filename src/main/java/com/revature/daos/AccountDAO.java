@@ -160,6 +160,23 @@ public class AccountDAO implements AccountIDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public float accountBalance (int account_id) {
+		try (Connection conn = ConnectionUtility.getConnection()) {
+			String sql = "SELECT account_balance FROM account, users WHERE account_id =" + account_id + ";";
+
+			Statement statement = conn.createStatement();
+			
+			ResultSet result = statement.executeQuery(sql);
+			result.next();
+			return result.getFloat("account_balance");
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }
 

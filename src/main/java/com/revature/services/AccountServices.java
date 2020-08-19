@@ -14,8 +14,6 @@ public class AccountServices {
 	private static AccountDAO acc = new AccountDAO();
 	private static UsersDAO user = new UsersDAO();
 	private static UserAccountsDAO ua = new UserAccountsDAO(); 
-	//private static ConsoleUtility cu = new ConsoleUtility();
-	// Method to prompt user for input for new account creation calling the setter and passing in my Scanner.
 
 	public static void accountCreation(Scanner input) {
 		
@@ -74,6 +72,7 @@ public class AccountServices {
 	}
 	
 	public float Deposit(Account a, float input) {
+		System.out.println(a);
 		if(input < 0 ) {
 			System.out.println("You have entered a negative input please select a positive number!");
 		}else {

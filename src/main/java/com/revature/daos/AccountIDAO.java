@@ -19,5 +19,7 @@ public List<Account> findAll();
 
 	public List<Account> findAllClosedAccounts();
 
+	public float accountBalance(int account_id);
+
 
 }
