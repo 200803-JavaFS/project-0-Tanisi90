@@ -113,7 +113,7 @@ public class ConsoleUtility {
 			while(true) {
 			System.out.println("What would you like to do as the Admin?: " 
 					+ "\n" + "[1] Approve / Deny account? " + "\n" + "[2] Deposit TP into account? " + "\n" + "[3] Withdrawl from account? "
-					+ "\n" + "[4] Transfer TP to different account? " + "\n" + "[5] View All Accounts" + "\n" + "[6] Close a account?");
+					+ "\n" + "[4] Transfer TP to different account? " + "\n" + "[5] View All Accounts" + "\n" + "[6] Close a account?" + "\n" + "[7] Logout");
 			int input = scan.nextInt();
 			switch(input) {
 			case 1: 
@@ -182,6 +182,7 @@ public class ConsoleUtility {
 			}
 			break;
 		default: System.out.println("Closing Application");
+		Menus();
 			}
 		}
 		}else { // Employee block
@@ -192,7 +193,7 @@ public class ConsoleUtility {
 			while(true) {
 			System.out.println("Have a beautiful day today! What would you like to accomplish today? :"
 					+ "\n" + "[1] Look at unopened accounts " + "\n" + "[2] Get user account information"
-					+ "\n" + "[3] View user account balance" + " \n" + "[4] Get users full information");
+					+ "\n" + "[3] View user account balance" + " \n" + "[4] Get users full information" + "\n" + "[5]Logout:");
 			int input = scan.nextInt();
 			switch(input) {
 			case 1: acc.findAllClosedAccounts();
@@ -216,7 +217,7 @@ public class ConsoleUtility {
 				System.out.println(us.findById(input));
 				break;
 			default: System.out.println("Closing Application");
-			
+			Menus();
 		}
 			}
 	}

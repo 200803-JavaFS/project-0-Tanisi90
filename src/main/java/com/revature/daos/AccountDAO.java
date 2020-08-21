@@ -87,7 +87,8 @@ public class AccountDAO implements AccountIDAO {
 	@Override
 	public boolean updateAccount(Account a) {
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE Account SET account_balance = ?, account_type = ?, status= ? ";
+			String sql = "UPDATE account SET account_balance = ?, account_type = ?, status= ? "
+					+ "WHERE account_id = " + a.getAccount_id() + ";";
 					
 			
 			PreparedStatement statement = conn.prepareStatement(sql);

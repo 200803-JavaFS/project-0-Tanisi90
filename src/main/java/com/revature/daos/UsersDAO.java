@@ -99,7 +99,8 @@ public class UsersDAO implements UsersIDAO {
 	@Override
 	public boolean updateUser(Users a) {
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String sql = "UPDATE users SET first_name = ?, last_name = ?, address = ?, city = ?, state = ?, zip = ?, email = ?"; 
+			String sql = "UPDATE users SET first_name = ?, last_name = ?, address = ?, city = ?, state = ?, zip = ?, email = ?"
+					+ "WHERE user_id = " + a.getUser_id() + ";"; 
 					
 					
 			
